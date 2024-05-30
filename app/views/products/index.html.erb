@@ -60,9 +60,8 @@
                     <div class="col mb-5">
                         <div class="card h-100 card-list">
                             <!-- Product image-->
-                            <%= link_to product_path(product) do %>
-                            <%= image_tag product.img, class: "card-img-top" if product.img.attached? %>
-                            <% end %>
+                            <%= link_to (image_tag product.img, class: "card-img card-img-top"), product %>
+
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
