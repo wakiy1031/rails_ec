@@ -1,2 +1,20 @@
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+
+.card-list {
+    &:hover {
+        border: 1px solid #000;
+        transition: 0.3s;
+    } 
+
+    .card-img-top {
+        width: 80%;
+        margin: 1em auto 0;
+        display: block;
+        &:hover {
+            transform: scale(1.1);
+            transition: 0.3s;
+        }
+    }
+}
