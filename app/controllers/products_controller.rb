@@ -2,12 +2,12 @@
 
 class ProductsController < ApplicationController
   def index
-    @products = Product.all
+    @products = Product.with_attached_img
   end
 
   def show
     @product = Product.find(params[:id])
-    @latest_product = Product.order(created_at: :desc).limit(4)
+    @latest_product = Product.order(created_at: :desc).limit(4).where.not(id: @product.id).distinct
   end
 
   def create
