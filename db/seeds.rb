@@ -51,7 +51,6 @@
 #   price: 100_000,
 #   stock: 10
 # )
-# product5.img.attach(io: File.open(Rails.root.join('app/assets/images/refrigerator.png')), filename: 'refrigerator.png')
 # product5.save!
 
 # product6 = Product.create!(

@@ -1,23 +1,23 @@
-  <div class="container mt-5 admin-product-index">
-    <h1>商品管理</h1>
-    <div class="row mt-4 mb-3">
-        <div class="col-md-12">
-            <%= link_to "新規商品作成", new_admin_product_path, class: 'btn btn-primary' %>
-        </div>
+  
+<div class="container mt-5 admin-product-index">
+  <h1>商品管理</h1>
+  <div class="row mt-4 mb-3">
+    <div class="col-md-12">
+      <%= link_to "新規商品作成", new_admin_product_path, class: 'btn btn-primary' %>
     </div>
-
-    <table class="table">
-      <thead class="table-dark">
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">商品名</th>
-          <th scope="col">価格</th>
-          <th scope="col"></th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        <% @products.each do |product| %>
+  </div>
+  <table class="table">
+    <thead class="table-dark">
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">商品名</th>
+        <th scope="col">価格</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody class="table-group-divider">
+      <% @products.each do |product| %>
         <tr>
           <td><%= product.id %></td>
           <td><%= product.name %></td>
@@ -29,7 +29,7 @@
             <%= link_to "削除", "/admin/products/#{product.id}", data: {turbo_method: :delete, turbo_confirm: "#{product.name}を削除します。よろしいですか？"}, class: 'btn btn-danger' %>
           </td>
         </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+      <% end %>
+    </tbody>
+  </table>
+</div>

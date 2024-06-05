@@ -9,7 +9,7 @@
       <div class="text-center">
         <!-- Product name-->
         <%= link_to product_path(product) do %>
-        <h5 class="fw-bolder"><%= product.name %></h5>
+          <h5 class="fw-bolder"><%= product.name %></h5>
         <% end %>
         <!-- Product price-->
         ¥<%= number_to_currency(product.price, unit: "¥", format: "%n", delimiter: ",", precision: 0) %>
