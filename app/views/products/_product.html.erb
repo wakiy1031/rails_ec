@@ -8,7 +8,9 @@
     <div class="card-body p-4">
       <div class="text-center">
         <!-- Product name-->
-        <h5 class="fw-bolder"><%= product.name %></h5>
+        <%= link_to product_path(product) do %>
+          <h5 class="fw-bolder"><%= product.name %></h5>
+        <% end %>
         <!-- Product price-->
         ¥<%= number_to_currency(product.price, unit: "¥", format: "%n", delimiter: ",", precision: 0) %>
       </div>

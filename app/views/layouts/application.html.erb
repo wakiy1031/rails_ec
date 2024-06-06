@@ -36,6 +36,7 @@
                 <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
               </ul>
             </li>
+            <li class="nav-item"><%= link_to "管理者ログイン", admin_products_path, class: "nav-link" %></li>
           </ul>
           <form class="d-flex">
             <button class="btn btn-outline-dark" type="submit">
@@ -47,6 +48,9 @@
         </div>
       </div>
     </nav>
+    <% if flash[:notice] %>
+      <div class="container alert alert-success"><%= notice %></div>
+    <% end %>
     <%= yield %>
     <!-- Footer-->
     <footer class="py-5 bg-dark">

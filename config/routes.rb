@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  get 'products', to: 'products#index'
-  get 'products/:id', to: 'products#show'
-  resources :products
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  root 'products#index'
+  resources :products, only: %i[index show]
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  namespace :admin do
+    resources :products, only: %i[index show new create edit update destroy]
+  end
 end
