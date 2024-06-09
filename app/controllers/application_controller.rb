@@ -2,7 +2,6 @@
 
 class ApplicationController < ActionController::Base
   before_action :current_cart
-  before_action :set_cart
   before_action :set_cart_products
 
   private
@@ -12,10 +11,6 @@ class ApplicationController < ActionController::Base
     @current_cart ||= Cart.find_or_create_by(id: session[:cart_id])
     session[:cart_id] = @current_cart.id
     @current_cart
-  end
-
-  def set_cart
-    @cart = Cart.find(session[:cart_id])
   end
 
   def set_cart_products
