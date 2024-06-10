@@ -31,6 +31,27 @@
     }
 }
 
+.list-group-item {
+    align-items: center;
+    .d-flex {
+        align-items: center;
+        figure {
+            width: 70px;
+            margin: 0 0.5em 0 0;
+        }
+    }
+    a.trashBtn {
+        margin-left: 0.5em;
+    }
+    strong {
+        span {
+            font-weight: 400;
+            font-size: 14px;
+            margin-right: 0.5em;
+        }
+    }
+}
+
 //管理画面用
 
 .admin-product-index {
