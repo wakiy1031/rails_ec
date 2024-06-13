@@ -1,0 +1,19 @@
+注文詳細
+
+注文番号: <%= @order.id %>
+注文日時: <%= @order.created_at.strftime("%Y-%m-%d %H:%M:%S") %>
+合計金額: ¥<%= number_to_currency(@order.total_price, unit: "", format: "%n", delimiter: ",", precision: 0) %>
+
+注文者情報
+名前: <%= "#{@order.first_name} #{@order.last_name}" %>
+メールアドレス: <%= @order.email %>
+都道府県: <%= @order.address1 %>
+市区町村: <%= @order.address2 %>
+番地、建物名等: <%= @order.address3 %>
+
+注文された商品
+<% @order.order_items.each do |item| %>
+  商品名: <%= item.product.name %>
+  数量: <%= item.quantity %>
+  価格: ¥<%= number_to_currency(item.price, unit: "", format: "%n", delimiter: ",", precision: 0) %>
+<% end %>

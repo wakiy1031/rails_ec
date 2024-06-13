@@ -6,7 +6,7 @@
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your cart</span>
+          <span class="text-primary">カート</span>
           <span class="badge bg-primary rounded-pill"><%= @current_cart.sum_quantity %></span>
         </h4>
         <ul class="list-group mb-3">
@@ -49,138 +49,104 @@
         </form>
       </div>
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Billing address</h4>
-        <form class="needs-validation" novalidate>
+        <h4 class="mb-3">お客様情報</h4>
+        <%= form_with model: @order, local: true, class: "needs-validation", html: {novalidate: true} do |f| %>
           <div class="row g-3">
             <div class="col-sm-6">
-              <label for="firstName" class="form-label">First name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid first name is required.
-              </div>
+              <%= f.label :first_name, class: "form-label" %>
+              <%= f.text_field :first_name, class: "form-control", placeholder: "山田", required: true %>
+              <% if @order.errors.include?(:first_name) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:first_name).first %></small>
+              <% end %>
             </div>
             <div class="col-sm-6">
-              <label for="lastName" class="form-label">Last name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                Valid last name is required.
-              </div>
+              <%= f.label :last_name, class: "form-label" %>
+              <%= f.text_field :last_name, class: "form-control", placeholder: "太郎", required: true %>
+              <% if @order.errors.include?(:last_name) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:last_name).first %></small>
+              <% end %>
             </div>
             <div class="col-12">
-              <label for="username" class="form-label">Username</label>
+              <%= f.label :user_name, class: "form-label" %>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
-                <input type="text" class="form-control" id="username" placeholder="Username" required>
-                <div class="invalid-feedback">
-                  Your username is required.
-                </div>
+                <%= f.text_field :user_name, class: "form-control", placeholder: "taro", required: true %>
               </div>
+              <% if @order.errors.include?(:user_name) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:user_name).first %></small>
+              <% end %>
             </div>
             <div class="col-12">
-              <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-              <input type="email" class="form-control" id="email" placeholder="you@example.com">
-              <div class="invalid-feedback">
-                Please enter a valid email address for shipping updates.
-              </div>
+              <%= f.label :email, class: "form-label" %>
+              <%= f.email_field :email, class: "form-control", placeholder: "sample@example.com", required: true %>
+              <% if @order.errors.include?(:email) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:email).first %></small>
+              <% end %>
+            </div>
+            <div class="col-3">
+              <%= f.label :zip, class: "form-label" %>
+              <%= f.text_field :zip, class: "form-control", placeholder: "000-0000", required: true %>
+              <% if @order.errors.include?(:zip) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:zip).first %></small>
+              <% end %>
             </div>
             <div class="col-12">
-              <label for="address" class="form-label">Address</label>
-              <input type="text" class="form-control" id="address" placeholder="1234 Main St" required>
-              <div class="invalid-feedback">
-                Please enter your shipping address.
-              </div>
+              <%= f.label :address1, class: "form-label" %>
+              <%= f.text_field :address1, class: "form-control", placeholder: "", required: true %>
+              <% if @order.errors.include?(:address1) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:address1).first %></small>
+              <% end %>
             </div>
             <div class="col-12">
-              <label for="address2" class="form-label">Address 2 <span class="text-body-secondary">(Optional)</span></label>
-              <input type="text" class="form-control" id="address2" placeholder="Apartment or suite">
+              <%= f.label :address2, class: "form-label" %>
+              <%= f.text_field :address2, class: "form-control", placeholder: "", required: true %>
+              <% if @order.errors.include?(:address2) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:address2).first %></small>
+              <% end %>
             </div>
-            <div class="col-md-5">
-              <label for="country" class="form-label">Country</label>
-              <select class="form-select" id="country" required>
-                <option value="">Choose...</option>
-                <option>United States</option>
-              </select>
-              <div class="invalid-feedback">
-                Please select a valid country.
-              </div>
-            </div>
-            <div class="col-md-4">
-              <label for="state" class="form-label">State</label>
-              <select class="form-select" id="state" required>
-                <option value="">Choose...</option>
-                <option>California</option>
-              </select>
-              <div class="invalid-feedback">
-                Please provide a valid state.
-              </div>
-            </div>
-            <div class="col-md-3">
-              <label for="zip" class="form-label">Zip</label>
-              <input type="text" class="form-control" id="zip" placeholder="" required>
-              <div class="invalid-feedback">
-                Zip code required.
-              </div>
+            <div class="col-12">
+              <%= f.label :address3, class: "form-label" %>
+              <%= f.text_field :address3, class: "form-control", placeholder: "", required: true %>
+              <% if @order.errors.include?(:address3) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:address3).first %></small>
+              <% end %>
             </div>
           </div>
           <hr class="my-4">
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="same-address">
-            <label class="form-check-label" for="same-address">Shipping address is the same as my billing address</label>
-          </div>
-          <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="save-info">
-            <label class="form-check-label" for="save-info">Save this information for next time</label>
-          </div>
-          <hr class="my-4">
-          <h4 class="mb-3">Payment</h4>
-          <div class="my-3">
-            <div class="form-check">
-              <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked required>
-              <label class="form-check-label" for="credit">Credit card</label>
-            </div>
-            <div class="form-check">
-              <input id="debit" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="debit">Debit card</label>
-            </div>
-            <div class="form-check">
-              <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" required>
-              <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-          </div>
+          <h4 class="mb-3">お客様のクレジットカード</h4>
           <div class="row gy-3">
             <div class="col-md-6">
-              <label for="cc-name" class="form-label">Name on card</label>
-              <input type="text" class="form-control" id="cc-name" placeholder="" required>
-              <small class="text-body-secondary">Full name as displayed on card</small>
-              <div class="invalid-feedback">
-                Name on card is required
-              </div>
+              <%= f.label :name_on_card, class: "form-label" %>
+              <%= f.text_field :name_on_card, class: "form-control", placeholder: "TARO YAMADA", required: true %>
+              <% if @order.errors.include?(:name_on_card) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:name_on_card).first %></small>
+              <% end %>
             </div>
             <div class="col-md-6">
-              <label for="cc-number" class="form-label">Credit card number</label>
-              <input type="text" class="form-control" id="cc-number" placeholder="" required>
-              <div class="invalid-feedback">
-                Credit card number is required
-              </div>
+              <%= f.label :card_number, class: "form-label" %>
+              <%= f.text_field :card_number, class: "form-control", placeholder: "1234567890123456", required: true %>
+              <% if @order.errors.include?(:card_number) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:card_number).first %></small>
+              <% end %>
             </div>
             <div class="col-md-3">
-              <label for="cc-expiration" class="form-label">Expiration</label>
-              <input type="text" class="form-control" id="cc-expiration" placeholder="" required>
-              <div class="invalid-feedback">
-                Expiration date required
-              </div>
+              <%= f.label :expiration, class: "form-label" %>
+              <%= f.text_field :expiration, class: "form-control", placeholder: "MM/YY", required: true %>
+              <% if @order.errors.include?(:expiration) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:expiration).first %></small>
+              <% end %>
             </div>
             <div class="col-md-3">
-              <label for="cc-cvv" class="form-label">CVV</label>
-              <input type="text" class="form-control" id="cc-cvv" placeholder="" required>
-              <div class="invalid-feedback">
-                Security code required
-              </div>
+              <%= f.label :cvv, class: "form-label" %>
+              <%= f.text_field :cvv, class: "form-control", placeholder: "123", required: true %>
+              <% if @order.errors.include?(:cvv) %>
+                <small class="text-danger"><%= @order.errors.full_messages_for(:cvv).first %></small>
+              <% end %>
             </div>
           </div>
           <hr class="my-4">
-          <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
-        </form>
+          <%= f.submit "購入する", class: "w-100 btn btn-primary btn-lg" %>
+        <% end %>
       </div>
     </div>
   </main>

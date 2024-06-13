@@ -87,3 +87,4 @@ group :test do
 end
 
 gem 'aws-sdk-s3', require: false
+gem 'letter_opener_web'

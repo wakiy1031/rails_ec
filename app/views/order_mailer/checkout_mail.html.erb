@@ -1,0 +1,29 @@
+<h1>注文詳細</h1>
+<p>注文番号: <%= @order.id %></p>
+<p>注文日時: <%= @order.created_at.strftime("%Y-%m-%d %H:%M:%S") %></p>
+<p>合計金額: ¥<%= number_to_currency(@order.total_price, unit: "", format: "%n", delimiter: ",", precision: 0) %></p>
+<h2>注文者情報</h2>
+<p>名前: <%= "#{@order.first_name} #{@order.last_name}" %></p>
+<p>メールアドレス: <%= @order.email %></p>
+<p>都道府県: <%= @order.address1 %></p>
+<p>市区町村: <%= @order.address2 %></p>
+<p>番地、建物名等: <%= @order.address3 %></p>
+<h2>注文された商品</h2>
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>数量</th>
+      <th>価格</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.quantity %></td>
+        <td>¥<%= number_to_currency(item.price, unit: "", format: "%n", delimiter: ",", precision: 0) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

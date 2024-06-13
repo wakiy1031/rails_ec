@@ -2,6 +2,7 @@
 
 class CartsController < ApplicationController
   def index
+    @order = Order.new
     @cart_products = current_cart.cart_products.includes(:product)
     @total_price = current_cart.total_price
   end
