@@ -51,7 +51,13 @@
       </div>
     </nav>
     <% if flash[:notice] %>
-      <div class="container alert alert-success"><%= notice %></div>
+      <div class="alert alert-success container">
+        <%= flash[:notice] %>
+      </div>
+    <% elsif flash[:alert] %>
+      <div class="alert alert-danger container">
+        <%= flash[:alert] %>
+      </div>
     <% end %>
     <%= yield %>
     <!-- Footer-->
