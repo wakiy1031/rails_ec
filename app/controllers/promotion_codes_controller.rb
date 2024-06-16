@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PromotionCodesController < ApplicationController
   before_action :check_promotion_code
   def create
@@ -15,9 +17,9 @@ class PromotionCodesController < ApplicationController
   private
 
   def check_promotion_code
-    if session[:promotion_code]
-      flash[:alert] = '割引コードは、1回の買い物につき1回のみ使用可能です。'
-      redirect_back(fallback_location: carts_path)
-    end
+    return unless session[:promotion_code]
+
+    flash[:alert] = '割引コードは、1回の買い物につき1回のみ使用可能です。'
+    redirect_back(fallback_location: carts_path)
   end
 end

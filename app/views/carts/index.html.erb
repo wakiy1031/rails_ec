@@ -11,37 +11,37 @@
         </h4>
         <ul class="list-group mb-3">
           <% if @cart_products.present? %>
-          <% @cart_products.each do |item| %>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div class="d-flex">
-                <figure><%= image_tag item.product.img, class: "card-img-top" if item.product.img.attached? %></figure>
-                <div>
-                  <h6 class="my-0">
-                    <%= link_to item.product.name, product_path(item.product.id)%>
-                  </h6>
-                  <span class="text-body-secondary">数量: <%= item.quantity %></span>
+            <% @cart_products.each do |item| %>
+              <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div class="d-flex">
+                  <figure><%= image_tag item.product.img, class: "card-img-top" if item.product.img.attached? %></figure>
+                  <div>
+                    <h6 class="my-0">
+                      <%= link_to item.product.name, product_path(item.product.id)%>
+                    </h6>
+                    <span class="text-body-secondary">数量: <%= item.quantity %></span>
+                  </div>
                 </div>
-              </div>
-              <div>
-                <span class="text-body-secondary ">¥<%= number_to_currency(item.product.price * item.quantity, unit: "¥", format: "%n", delimiter: ",", precision: 0) %></span>
-                <%= link_to cart_product_path(item), data: { "turbo-method": :delete }, class:'btn btn-outline-danger trashBtn' do%>
-                  <i class="bi bi-trash3"></i>
-                <% end %>
-              </div>
+                <div>
+                  <span class="text-body-secondary ">¥<%= number_to_currency(item.product.price * item.quantity, unit: "¥", format: "%n", delimiter: ",", precision: 0) %></span>
+                  <%= link_to cart_product_path(item), data: { "turbo-method": :delete }, class:'btn btn-outline-danger trashBtn' do%>
+                    <i class="bi bi-trash3"></i>
+                  <% end %>
+                </div>
+              </li>
+            <% end %>
+            <% if @promotion_code.present? %>
+              <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+                <div class="text-success">
+                  <h6 class="my-0">割引額</h6>
+                </div>
+                <span class="text-success">-<%= number_to_currency(@promotion_code.discount, unit: "¥", format: "%n", delimiter: ",", precision: 0) %></span>
+              </li>
+            <% end %>
+            <li class="list-group-item d-flex justify-content-between">
+              <span>合計</span>
+              <strong><span>JPY</span>¥<%= number_to_currency(@total_price, unit: "¥", format: "%n", delimiter: ",", precision: 0) %></strong>
             </li>
-          <% end %>
-          <% if @promotion_code.present? %>
-          <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
-            <div class="text-success">
-              <h6 class="my-0">割引額</h6>
-            </div>
-            <span class="text-success">-<%= number_to_currency(@promotion_code.discount, unit: "¥", format: "%n", delimiter: ",", precision: 0) %></span>
-          </li>
-          <% end %>
-          <li class="list-group-item d-flex justify-content-between">
-            <span>合計</span>
-            <strong><span>JPY</span>¥<%= number_to_currency(@total_price, unit: "¥", format: "%n", delimiter: ",", precision: 0) %></strong>
-          </li>
           <% else %>
             商品はありません
           <% end %>
@@ -49,9 +49,9 @@
         <%= form_with url: promotion_codes_path, class: "card p-2" do |f|%>
           <div class="input-group">
             <%= f.text_field :code, class: "form-control", placeholder: "プロモーションコード" %>
-                <%= f.button "適用する", type: "submit", class: "btn btn-secondary" %>
+            <%= f.button "適用する", type: "submit", class: "btn btn-secondary" %>
           </div>
-            <% end %>
+        <% end %>
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">お客様情報</h4>

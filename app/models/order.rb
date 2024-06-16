@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
+  belongs_to :promotion_code, optional: true
   has_many :order_items, dependent: :destroy
 
   validates :first_name, presence: true, length: { maximum: 15 }
@@ -17,6 +18,8 @@ class Order < ApplicationRecord
   validates :cvv, presence: true, format: { with: /\A\d{3,4}\z/, message: 'は3桁または4桁であること' }
 
   def total_price
-    order_items.sum { |item| item.quantity * item.price }
+    total = order_items.sum { |item| item.quantity * item.price }
+    total -= promotion_code.discount if promotion_code.present?
+    total
   end
 end
