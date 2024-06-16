@@ -2,6 +2,7 @@
 
 class OrdersController < ApplicationController
   before_action :basic_auth
+  before_action :set_cart_products
   def create
     @order = Order.new(order_params)
 
@@ -16,6 +17,9 @@ class OrdersController < ApplicationController
       end
       @total_price = @current_cart.total_price
       @current_cart.cart_products.destroy_all
+
+      # セッションから割引コードを削除する
+      session.delete(:promotion_code)
 
       OrderMailer.checkout_email(@order).deliver_now
 
