@@ -14,11 +14,11 @@ class PromotionCodesController < ApplicationController
       session[:promotion_code] = @promotion_code.code
       flash[:notice] = '割引コードを適用しました。'
     else
-      if @promotion_code
-        flash[:alert] = 'この割引コードは既に使用されています。'
-      else
-        flash[:alert] = '不正な割引コードです。'
-      end
+      flash[:alert] = if @promotion_code
+                        'この割引コードは既に使用されています。'
+                      else
+                        '不正な割引コードです。'
+                      end
     end
     redirect_to carts_path
   end
