@@ -19,3 +19,4 @@
   数量: <%= item.quantity %>
   価格: ¥<%= number_to_currency(item.price, unit: "", format: "%n", delimiter: ",", precision: 0) %>
 <% end %>
+割引額: -<%= number_to_currency(@order.promotion_code.discount, unit: "¥", format: "%n", delimiter: ",", precision: 0) %>
