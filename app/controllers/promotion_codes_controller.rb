@@ -6,20 +6,18 @@ class PromotionCodesController < ApplicationController
   def create
     @promotion_code = PromotionCode.find_by(code: params[:code])
 
-    if @promotion_code && !promotion_code_used?(@promotion_code.code)
-      # セッション内にused_promotion_codesが存在しない場合は空の配列
-      session[:used_promotion_codes] ||= []
-      # プロモーションコードをused_promotion_codesに追加
-      session[:used_promotion_codes] << @promotion_code.code
-      session[:promotion_code] = @promotion_code.code
-      flash[:notice] = '割引コードを適用しました。'
+    if @promotion_code
+      if @promotion_code.is_used
+        flash[:alert] = 'この割引コードは使用済みです。'
+      else
+        @promotion_code.update(is_used: true)
+        session[:promotion_code] = @promotion_code.code
+        flash[:notice] = '割引コードを適用しました。'
+      end
     else
-      flash[:alert] = if @promotion_code
-                        'この割引コードは既に使用されています。'
-                      else
-                        '不正な割引コードです。'
-                      end
+      flash[:alert] = '不正な割引コードです。'
     end
+
     redirect_to carts_path
   end
 
@@ -30,9 +28,5 @@ class PromotionCodesController < ApplicationController
 
     flash[:alert] = '割引コードは、1回の買い物につき1回のみ使用可能です。'
     redirect_back(fallback_location: carts_path)
-  end
-
-  def promotion_code_used?(code)
-    session[:used_promotion_codes]&.include?(code)
   end
 end
